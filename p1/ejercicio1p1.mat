@@ -1,0 +1,61 @@
+# Created by Octave 4.2.2, Wed Apr 04 00:10:04 2018 GMT <unknown@unknown>
+# name: n
+# type: scalar
+2
+
+
+# name: q
+# type: matrix
+# rows: 2
+# columns: 1
+ 110
+ 120
+
+
+# name: s
+# type: matrix
+# rows: 2
+# columns: 1
+ 209.1623853418765
+ 234.8920584701318
+
+
+# name: sumq
+# type: scalar
+230
+
+
+# name: sums
+# type: scalar
+444.0544438120083
+
+
+# name: sumt
+# type: scalar
+0.1343923842151427
+
+
+# name: t
+# type: matrix
+# rows: 2
+# columns: 1
+ 0.06914459019566166
+ 0.06524779401948105
+
+
+# name: u
+# type: matrix
+# rows: 2
+# columns: 1
+ 3.802952460761391
+ 3.914867641168863
+
+
+# name: v
+# type: matrix
+# rows: 2
+# columns: 1
+ 55
+ 60
+
+

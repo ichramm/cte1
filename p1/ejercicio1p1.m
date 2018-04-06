@@ -1,0 +1,13 @@
+clear;
+v = [55:5:60];
+n = length(v);
+u = v.^(1/3);
+u = u';
+v = v';
+q = n*v;
+s = v.*u;
+t = u./v;
+sumq = sum(q);
+sums = sum(s);
+sumt = sum(t);
+save 'ejercicio1p1.mat';
