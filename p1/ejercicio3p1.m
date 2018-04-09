@@ -8,18 +8,21 @@ row2 = A(2,:);
 row4 = A(4,:);
 column2 = A(:,2);
 
-Zeroes = zeros(n, m);
-Ones = ones(n, m);
+vect_zeros = zeros(n, m);
+vect_ones = ones(n, m);
 
 save 'ejercicio3p1.mat';
 
 figure;
+hold on
 % una en rojo con dashes y linea un poco mas ancha
-% otra en azul continua
-plot(A(:,4), column2, 'r--','LineWidth',2, A(:,3), A(:,1), '-bo','MarkerEdgeColor','g','MarkerFaceColor',[0 1 0],'MarkerSize',2);
+plot(A(:,4), column2, 'r--','LineWidth',2)
+% otra en azul continua con marker (verde tanto por letra como por rgb)
+plot(A(:,3), A(:,1), '-bo','MarkerEdgeColor','g','MarkerFaceColor',[0 1 0],'MarkerSize',2);
+hold off
 title('Practico1 - Ejercicio 3');
-xlabel('columns 2 and 1');
-ylabel('columns 4 and 3');
-legend('column 4', 'column 3');
+ylabel('Columnas 1 y 2');
+xlabel('Columnas 3 y 4');
+legend('Columna 4', 'Columna 3', 'Location', 'northwest');
 
 print('grafica3p1.jpg', '-djpeg');

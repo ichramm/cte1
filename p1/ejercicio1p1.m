@@ -1,9 +1,9 @@
 clear;
-v = [55:5:60];
+v = [55:5:480];
 n = length(v);
 u = v.^(1/3);
-u = u';
-v = v';
+ut = u';
+vt = v';
 q = n*v;
 s = v.*u;
 t = u./v;
