@@ -1,0 +1,44 @@
+function [ grado, coef, a, b ] = aproximar_polinomio(x, y, grado_esperado)
+% aproximar_polinomio Calcula el polinomio que mejor aproxima la funcion f(X) = y.
+	[grado, coef] = calcular_grado(x, y, grado_esperado);
+
+	% Elevo las X al grado calcular para asi simplificar
+	% y hallar un polinomio de grado 1 
+	x = x.^grado;
+
+	log_x = log(x);
+	log_y = log(y);
+	fit = polyfit(log_x, log_y, 1);
+
+	% log(y) = a * log(x) + b
+
+	xVec = linspace(log_x(1), log_x(end), 100);
+	log_y_fit = polyval(fit, xVec);
+
+	% Plot logarithmic data and fit
+	%subplot(1,2,1);
+	%plot(xVec, log_y_fit, log_x, log_y,'o');
+	%grid on;
+	%legend('Fit','Data')
+	%title('log-log Data Plot')
+	
+	a = fit(1);
+	b = fit(2);
+	% y_fit = x.^a * exp(b);
+
+	%P = polyfit(log(x), log(y), 1);
+	%[p, ~, mu] = polyfit(x.^grade, y, 1);
+	%f = polyval(p, x, [], mu);
+	%P = polyfit(f, y, 1);
+
+	%k = 1e10;
+	%P = polyfit((x.^grade), y*k, 1);
+	%P(1) = P(1) / k;
+	
+	% Plot linear scale
+	%subplot(1,2,2)
+	%plot(x, x.^fit(1)*exp(fit(2)), x, y,'o');
+	%grid on;
+	%legend('Fit','Data');
+	%title('Original scale plot')
+end
