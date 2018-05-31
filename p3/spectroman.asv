@@ -133,7 +133,7 @@ end
 function draw_tables(hax, reference_lines, peak_locations, peak_widths, ~, relaerror, abserror)
 	tableposx = subindex(get(hax, 'XLim'), 1) + 50; %startx + 10; % + 1100;
 	tableposy = subindex(get(hax, 'YLim'), 2) - 10; %280;		
-	text(tableposx, tableposy, 'Maximos locales y error relativo:', 'Color', 'k', 'FontSize', 12);
+	text(tableposx, tableposy, 'Maximos locales y error relativo:', 'Color', 'k', 'FontSize', 121);
 	for i=1:length(peak_locations)
 		if ~isempty(relaerror) && i <= length(relaerror) && ~isnan(relaerror(i))
 			textstr = sprintf('  |- \\lambda = %.2f, ref = %.2f, rel error: %.3f%%, abs error: %.1f, width = %.1f', ...
@@ -142,7 +142,7 @@ function draw_tables(hax, reference_lines, peak_locations, peak_widths, ~, relae
 			textstr = sprintf('  |- \\lambda = %.2f, ref = %.2f, width = %.1f', ...
 				peak_locations(i), reference_lines(i), peak_widths(i));
 		end
-		text(tableposx, tableposy-(i*10), textstr, 'Color', 'k', 'FontSize', 12);
+		text(tableposx, tableposy-(i*10), textstr, 'Color', 'k', 'FontSize', 11);
 	end
 end
 
