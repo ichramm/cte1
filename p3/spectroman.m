@@ -1,6 +1,6 @@
 %
 function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, peak_values] = spectroman(element)
-% spectroman Procesa los datos del archivo data_file (acorder a la letra de la practica 3)
+% spectroman Procesa los datos del archivo data_file (acorde a la letra de la practica 3)
 	% data tiene tutti, hay que extraer las columnas que interesan
 	if nargin < 1
 		element = 'Hidrogeno';
@@ -28,7 +28,7 @@ function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, pe
 		min_peak_x = 4000;
 		min_peak_prominence = 10;
 	elseif strcmp(element, 'Desconocido2')
-		% Luego de estudiar la info disponible concluimos que Desconocido1 es Neon
+		% Luego de estudiar la info disponible concluimos que Desconocido2 es Neon
 		reference_lines = load('./reference_lines/Neon.txt');
 		num_peaks = length(reference_lines);
 		min_peak_x = 4000;
@@ -54,7 +54,6 @@ function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, pe
 	grid on;
 	
 	% Busco picos, pero ignoro el principio del vector
-	% Nota: MinPeakProminence = 20 parece funcionar ok con todos los sets de datos
 	start_pos = find(lambda > min_peak_x, 1);
 	
 	[peak_values, peak_locations, peak_widths, peak_proms] = findpeaks(luma(start_pos:end), lambda(start_pos:end),...
@@ -89,6 +88,7 @@ function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, pe
 	
 	print(strcat(element, '-graph1.png'), '-dpng');
 	
+	% Reyeno con NaNs el vector de picos (en dos casos faltó uno)
 	if length(peak_locations) < length(reference_lines)
 		peak_locations = cat(1, peak_locations, NaN*ones(length(reference_lines)-length(peak_locations)));
 		peak_widths = cat(1, peak_widths, NaN*ones(length(reference_lines)-length(peak_widths)));
@@ -101,6 +101,7 @@ function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, pe
 	if exist(fullfile(cd, strcat(element, '.m')), 'file')
 		clear(element);
 		[relaerror, abserror] = feval(element, peak_locations, reference_lines, lambda, luma, peak_values);
+		% El archivo puede generar otra grafica, tengo que volver a la original
 		set(groot, 'CurrentFigure', fig);
 	end
 	
@@ -117,6 +118,7 @@ function [peak_locations, reference_lines, relaerror, abserror, lambda, luma, pe
 	% Creo variables para cftool
 	% Nota: Crear variables de esta manera es MUY mala practica. Lo hago porque 
 	% cftool no soporta indexar matrices
+	% Update: Soporta si, pero esta medio escondido y no parece dar los mismos resultados
 	for i=1:length(peak_locations)
 		if ~isnan(peak_locations(i))
 			[x_region, y_region] = make_peak_region(peak_locations(i), lambda, luma);
@@ -178,13 +180,4 @@ function set_header(filename, header)
 	fprintf(fid, '%s', text);
 	fclose(fid);
 end
-
-% cargar 7 x 7 -> A
-% sacar vectores re3sultantes -> I, lambda
-% graficar I = I(A) (poner tit, ejes, etc)
-% detectar picos (findpeaks)
-% comparar con tablas
-% calc E_r
-% ajustar perfil de linea gaussiana (cftool)
-% 
 
